@@ -17,4 +17,7 @@ packadd vim-airline   " git@github.com:vim-airline/vim-airline.git
 packadd vim-fugitive  " git@github.com:tpope/vim-fugitive.git
 packadd vim-signify   " git@github.com:mhinz/vim-signify.git
 packadd YouCompleteMe " git@github.com:ycm-core/YouCompleteMe.git
+
 set updatetime=100
+let g:ycm_autoclose_preview_window_after_completion=1
+
