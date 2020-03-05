@@ -10,3 +10,5 @@ gitpkg git@github.com:vim-airline/vim-airline.git
 gitpkg git@github.com:tpope/vim-fugitive.git
 gitpkg git@github.com:mhinz/vim-signify.git
 gitpkg git@github.com:leafo/moonscript-vim.git
+gitpkg git@github.com:chr4/nginx.vim.git
+
