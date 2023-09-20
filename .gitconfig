@@ -1,0 +1,17 @@
+[user]
+    email = TODO 
+    name = TODO
+    signingkey = TODO
+[commit]
+    gpgsign = true
+[url "https://github"]
+    insteadOf = "git://github"
+[init]
+    defaultBranch = main
+[alias]
+    c = commit
+    ds = diff --staged
+    a = add
+    p = push
+[core]
+    editor = nvim
