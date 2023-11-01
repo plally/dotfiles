@@ -13,6 +13,7 @@ local plugins = {
             { "hrsh7th/nvim-cmp" },     -- Required
             { "hrsh7th/cmp-nvim-lsp" }, -- Required
             { "L3MON4D3/LuaSnip" },     -- Required
+            { "rafamadriz/friendly-snippets" },
         }
     },
     {
@@ -20,7 +21,14 @@ local plugins = {
         config = function()
         end
     },
-    { "github/copilot.vim", event = "VeryLazy" },
+    -- {
+    --     "danymat/neogen",
+    --     dependencies = "nvim-treesitter/nvim-treesitter",
+    --     config = true,
+    --     opts = { snippet_engine = "luasnip" }
+    -- },
+    { "saadparwaiz1/cmp_luasnip" },
+    { "github/copilot.vim",      event = "VeryLazy" },
     {
         "jose-elias-alvarez/null-ls.nvim",
         config = function()

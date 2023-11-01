@@ -52,13 +52,28 @@ vim.diagnostic.config({
 })
 
 local cmp = require("cmp")
+local cmp_action = require("lsp-zero").cmp_action()
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
 cmp.setup({
+    sources = {
+        { name = "nvim_lsp" },
+        { name = "luasnip" },
+    },
     mapping = {
         ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
         ["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
         ["<C-y>"] = cmp.mapping.confirm({ select = true }),
         ["<CR>"] = cmp.mapping.confirm({ select = true }),
-        ["<C-Space>"] = cmp.mapping.complete()
-    }
+        -- Navigate between snippet placeholder
+        ["<C-f>"] = cmp_action.luasnip_jump_forward(),
+        ["<C-b>"] = cmp_action.luasnip_jump_backward(),
+        ["<C-Space>"] = cmp.mapping.complete(),
+        ["<C-f>"] = cmp_action.luasnip_jump_forward(),
+        ["<C-b>"] = cmp_action.luasnip_jump_backward(),
+    },
+    snippet = {
+        expand = function(args)
+            require("luasnip").lsp_expand(args.body)
+        end,
+    },
 })

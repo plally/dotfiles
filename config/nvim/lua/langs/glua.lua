@@ -11,7 +11,7 @@ require("lspconfig").lua_ls.setup({
                 enable = false
             },
             format = {
-                enable = true,
+                enable = false,
                 defaultConfig = {
                     indent_style = "space",
                     indent_size = "4",
