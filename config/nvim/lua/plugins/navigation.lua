@@ -41,9 +41,11 @@ local plugins = {
             }
         },
         init = function()
-            vim.api.nvim_create_user_command("Tree", function(_) require("nvim-tree").focus() end, { nargs = 0 })
+            vim.api.nvim_create_user_command("Tree", function(_) require("nvim-tree.api").tree.toggle() end,
+                { nargs = 0 })
         end
     },
 }
+
 
 return plugins
