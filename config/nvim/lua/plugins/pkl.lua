@@ -1,11 +1,5 @@
 ---@type LazySpec
 local plugins = {
-    -- {
-    --     "nvim-treesitter/nvim-treesitter",
-    --     build = function(_)
-    --         vim.cmd("TSUpdate")
-    --     end,
-    -- },
     {
         "https://github.com/apple/pkl-neovim",
         lazy = true,

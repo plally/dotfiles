@@ -28,26 +28,9 @@ lsp.set_sign_icons({
     info = ""
 })
 
-if vim.fn.isdirectory("lua/autorun") == 1 then
-    print("autorun exists")
-    require("langs.glua")
-else
-    local lspconfig = require("lspconfig")
-    lspconfig.lua_ls.setup({
-        settings = {
-            Lua = {
-                workspace = {
-                    checkThirdParty = false
-                }
-            }
-        }
-    })
-end
-require("langs.go")
-
 lsp.setup()
 vim.diagnostic.config({
-    virtual_text = true,
+    virtual_text = { severity = { min = vim.diagnostic.severity.WARN } },
 })
 
 local cmp = require("cmp")

@@ -28,6 +28,7 @@ local config = {
                             end
                         }
                     },
+                    ["core.summary"] = {},
                     ["core.integrations.telescope"] = {},
                     ["core.defaults"] = {}, -- Loads default behaviour
                     ["core.concealer"] = {
