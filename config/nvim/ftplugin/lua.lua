@@ -3,13 +3,10 @@ if vim.fn.isdirectory("lua/autorun") == 1 then
         settings = {
             Lua = {
                 workspace = {
-                    checkThirdParty = false,
+                    maxPreload = 50000,
                     library = {
-                        vim.fn.expand("$HOME/LuaLibs/glua/")
+                        vim.fn.expand("$HOME/LuaLibs/glua")
                     }
-                },
-                hint = {
-                    enable = false
                 },
                 format = {
                     enable = true,
@@ -43,7 +40,7 @@ if vim.fn.isdirectory("lua/autorun") == 1 then
         }
     })
 
-    vim.fn.jobstart("git pull origin main --recurse-submodules", { cwd = vim.fn.expand("$HOME/LuaLibs/glua") })
+    vim.fn.jobstart("git pull origin main --recurse-submodules", { cwd = vim.fn.expand("$HOME/LuaLibs/glua/glua") })
 else
     local lspconfig = require("lspconfig")
     lspconfig.lua_ls.setup({
