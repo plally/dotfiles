@@ -2,6 +2,7 @@
 local plugins = {
     {
         "ray-x/go.nvim",
+        commit = "54387e506e597ab65a89baa1681429728f66ed71",
         dependencies = { -- optional packages
             "ray-x/guihua.lua",
             "neovim/nvim-lspconfig",
