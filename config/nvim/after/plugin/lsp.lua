@@ -18,6 +18,7 @@ lsp.format_on_save({
     servers = {
         ["lua_ls"] = { "lua" },
         ["rust_analyzer"] = { "rust" },
+        ["null-ls"] = { "nix" },
     }
 })
 

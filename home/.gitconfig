@@ -1,7 +1,3 @@
-[user]
-    email = TODO 
-    name = TODO
-    signingkey = TODO
 [commit]
     gpgsign = true
 [url "https://github"]
@@ -15,3 +11,6 @@
     p = push
 [core]
     editor = nvim
+
+[include]
+    path = ~/.gitconfig.local
