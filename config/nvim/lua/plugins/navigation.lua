@@ -22,6 +22,12 @@ local plugins = {
         },
     },
     {
+        "ggandor/leap.nvim",
+        config = function()
+            require('leap').create_default_mappings()
+        end
+    },
+    {
         "nvim-telescope/telescope-ui-select.nvim",
         config = function()
             require("telescope").load_extension("ui-select")
