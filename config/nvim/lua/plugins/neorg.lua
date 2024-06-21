@@ -1,22 +1,18 @@
+-- https://vhyrro.github.io/posts/neorg-and-luarocks/
+
+
 ---@type LazySpec
 local config = {
     {
-        {
-            "nvim-neorg/neorg",
-            opts = {
-                load = {
-                    ["core.defaults"] = {},
-                    ["core.integrations.telescope"] = {},
-                },
-            },
-            dependencies = { { "nvim-lua/plenary.nvim" }, { "nvim-neorg/neorg-telescope" } },
-        }
+        "vhyrro/luarocks.nvim",
+        priority = 1000,
+        config = true,
     },
     {
         "nvim-neorg/neorg",
         build = ":Neorg sync-parsers",
+        dependencies = { { "nvim-lua/plenary.nvim" }, { "nvim-neorg/neorg-telescope" }, { "vhyrro/luarocks.nvim" } },
         cmd = "Neorg",
-        dependencies = { { "nvim-lua/plenary.nvim" }, { "nvim-neorg/neorg-telescope" } },
         config = function()
             require("neorg").setup {
                 load = {
@@ -62,19 +58,6 @@ local config = {
                     noremap = true,
                 })
             end)
-            -- local callbacks = require("neorg.core.callbacks")
-            --
-            -- callbacks.on_event("core.keybinds.events.enable_keybinds", function(_, keybinds)
-            --     keybinds.map_event_to_mode("norg", {
-            --         n = {
-            --             { "<LocalLeader>ls", "core.integrations.telescope.find_linkable" },
-            --             { "<LocalLeader>li", "core.integrations.telescope.insert_link" },
-            --         },
-            --     }, {
-            --         silent = true,
-            --         noremap = true,
-            --     })
-            -- end)
         end,
     },
 }
