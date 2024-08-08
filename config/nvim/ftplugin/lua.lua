@@ -3,10 +3,11 @@ if vim.fn.isdirectory("lua/autorun") == 1 then
         settings = {
             Lua = {
                 workspace = {
-                    maxPreload = 50000,
+                    maxPreload = 10000000,
                     library = {
                         vim.fn.expand("$HOME/LuaLibs/glua")
-                    }
+                    },
+                    checkThirdParty = false
                 },
                 format = {
                     enable = true,
@@ -33,7 +34,15 @@ if vim.fn.isdirectory("lua/autorun") == 1 then
                     special = {
                         include = "require"
                     },
-                    nonstandardSymbol = {},
+                    nonstandardSymbol = {
+                        "!",
+                        "!=",
+                        "&&",
+                        "||",
+                        "//",
+                        "/**/",
+                        "continue"
+                    },
                     version = "LuaJIT",
                 }
             }

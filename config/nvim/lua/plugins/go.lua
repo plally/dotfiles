@@ -2,7 +2,28 @@
 local plugins = {
     {
         "ray-x/go.nvim",
-        -- commit = "54387e506e597ab65a89baa1681429728f66ed71",
+        lsp_cfg = {
+            settings = {
+                gopls = {
+                    staticcheck = true,
+                    codelenses = {
+                        gc_details = true,
+                    },
+                    analyses = {
+                        ST1005 = true,
+                        ST1006 = true,
+                        ST1013 = true,
+                        ST1018 = true,
+                        ST1020 = true,
+                        ST1021 = true,
+                        ST1022 = true,
+                        ST1023 = true,
+                        ST1016 = true,
+                    }
+                }
+            },
+        },
+
         dependencies = { -- optional packages
             "ray-x/guihua.lua",
             "neovim/nvim-lspconfig",

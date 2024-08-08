@@ -1,7 +1,7 @@
 ---@type LazySpec
 local config = {
     { "tpope/vim-fugitive",    cmd = "G" },
-    { "folke/trouble.nvim",    cmd = "Trouble", dependencies = { "nvim-tree/nvim-web-devicons" } },
+    { "folke/trouble.nvim",    cmd = "Trouble", dependencies = { "nvim-tree/nvim-web-devicons" }, opts = {} },
     { "numToStr/Comment.nvim", config = true },
     {
         "mbbill/undotree",
