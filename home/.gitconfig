@@ -1,7 +1,7 @@
 [commit]
     gpgsign = true
-[url "https://github"]
-    insteadOf = "git://github"
+[url "git@github.com:"]
+    insteadOf = https://github.com/
 [init]
     defaultBranch = main
 [alias]
