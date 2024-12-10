@@ -9,7 +9,7 @@ local plugins = {
         dashboard = {
             sections = {
                 {
-                    ttl = 1,
+                    ttl = 3600,
                     section = "terminal",
                     cmd = "bash ~/.config/nvim/randomfox.sh",
                     height = 20,
