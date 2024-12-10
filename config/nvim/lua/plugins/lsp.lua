@@ -28,7 +28,7 @@ local plugins = {
     --     opts = { snippet_engine = "luasnip" }
     -- },
     { "saadparwaiz1/cmp_luasnip" },
-    { "github/copilot.vim",      event = "VeryLazy" },
+    { "github/copilot.vim" },
     {
         "jose-elias-alvarez/null-ls.nvim",
         config = function()
