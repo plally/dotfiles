@@ -5,7 +5,7 @@ local plugins = {
 
     {
         "nvim-lualine/lualine.nvim",
-        dependencies = { "nvim-tree/nvim-web-devicons" },
+        dependencies = { "nvim-tree/nvim-web-devicons", "nvim-lua/lsp-status.nvim" },
         config = function()
             local lspStatus = require("lsp-status")
             lspStatus.register_progress()

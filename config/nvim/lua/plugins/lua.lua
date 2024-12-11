@@ -1,7 +1,7 @@
 ---@type LazySpec
 local plugins = {
+    { "folke/neodev.nvim",    config = true },
     { "leafo/moonscript-vim", ft = "moon" },
-    { "folke/neodev.nvim" },
 }
 
 return plugins

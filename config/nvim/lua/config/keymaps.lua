@@ -24,7 +24,7 @@ vim.api.nvim_create_user_command("LuaFormat", function()
         return
     end
 
-    filesTbl = vim.split(files, "\n")
+    local filesTbl = vim.split(files, "\n")
 
     for _, file in ipairs(filesTbl) do
         vim.cmd("e " .. file)

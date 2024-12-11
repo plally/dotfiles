@@ -1,36 +1,54 @@
 ---@type LazySpec
 local plugins = {
-    {
-        "VonHeikemen/lsp-zero.nvim",
-        branch = "v2.x",
-        dependencies = {
-            -- LSP Support
-            { "neovim/nvim-lspconfig" },             -- Required
-            { "williamboman/mason.nvim" },           -- Optional
-            { "williamboman/mason-lspconfig.nvim" }, -- Optional
+    { "neovim/nvim-lspconfig" },
+    { "williamboman/mason.nvim", config = true },
 
-            -- Autocompletion
-            { "hrsh7th/nvim-cmp" },     -- Required
-            { "hrsh7th/cmp-nvim-lsp" }, -- Required
-            { "L3MON4D3/LuaSnip" },     -- Required
-            { "rafamadriz/friendly-snippets" },
-        },
-        event = "VeryLazy",
+    {
+        "williamboman/mason-lspconfig.nvim",
+        opts = {
+            ensure_installed = {
+                "rust_analyzer",
+                "gopls",
+                "lua_ls",
+            },
+            handlers = {
+                function(server_name)
+                    require("lspconfig")[server_name].setup({})
+                end,
+
+                lua_ls = function()
+                    local conf = require("lspconfigs.lua")
+                    require("lspconfig").lua_ls.setup(conf)
+                    vim.fn.jobstart("git pull origin main --recurse-submodules",
+                        { cwd = vim.fn.expand("$HOME/LuaLibs/glua/glua") })
+                end,
+                rust_analyzer = function()
+                    require("lspconfig").rust_analyzer.setup({
+                        settings = {
+                            ["rust-analyzer"] = {
+                                files = {
+                                    -- if you have a directory with a large amount of files rust analyzer can get stuck so it must be excluded
+                                    excludeDirs = { "data" },
+                                },
+                            }
+                        }
+                    })
+                end,
+            }
+        }
     },
+
     {
         "nvim-lua/lsp-status.nvim",
         config = function()
         end,
         event = "VeryLazy",
     },
-    -- {
-    --     "danymat/neogen",
-    --     dependencies = "nvim-treesitter/nvim-treesitter",
-    --     config = true,
-    --     opts = { snippet_engine = "luasnip" }
-    -- },
-    { "saadparwaiz1/cmp_luasnip", event = "VeryLazy" },
-    { "github/copilot.vim",       event = "VeryLazy" },
+
+    { "github/copilot.vim", event = "VeryLazy" },
+
+
+    -- TODO none ls
     {
         "jose-elias-alvarez/null-ls.nvim",
         config = function()
@@ -43,6 +61,40 @@ local plugins = {
             })
         end,
         event = "VeryLazy"
-    }
+    },
+    {
+        "saghen/blink.cmp",
+        lazy = false, -- lazy loading handled internally
+        dependencies = "rafamadriz/friendly-snippets",
+        version = "v0.*",
+
+        ---@module 'blink.cmp'
+        ---@type blink.cmp.Config
+        opts = {
+            keymap = { preset = "enter" },
+
+            ---@diagnostic disable-next-line: missing-fields
+            appearance = {
+                use_nvim_cmp_as_default = true,
+                nerd_font_variant = "mono",
+            },
+
+            ---@diagnostic disable-next-line: missing-fields
+            completion = {
+                documentation = {
+                    auto_show = true,
+                    auto_show_delay_ms = 500,
+                }
+            },
+
+            ---@diagnostic disable-next-line: missing-fields
+            sources = {
+                default = { "lsp", "path", "snippets", "buffer" },
+            },
+
+        },
+        opts_extend = { "sources.default" }
+    },
 }
+
 return plugins

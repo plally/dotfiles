@@ -27,6 +27,7 @@ local plugins = {
         toggle = {},
         quickfile = {},
         -- rename = {},
+        statuscolumn = {},
         gitbrowse = {},
         scratch = {
             ---@type table<string, snacks.win.Config>
