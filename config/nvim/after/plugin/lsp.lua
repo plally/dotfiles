@@ -11,7 +11,7 @@ lsp.ensure_installed({
 })
 
 lsp.on_attach(function(_, bufnr)
-    lsp.default_keymaps({ buffer = bufnr })
+    lsp.default_keymaps({ buffer = bufnr, preserve_mappings = false })
 end)
 
 lsp.format_on_save({

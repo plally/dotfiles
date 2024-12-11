@@ -12,7 +12,7 @@ local plugins = {
                     ttl = 3600,
                     section = "terminal",
                     cmd = "bash ~/.config/nvim/randomfox.sh",
-                    height = 20,
+                    height = 25,
                     padding = 1,
                 },
                 {
@@ -26,6 +26,8 @@ local plugins = {
         input = {},
         toggle = {},
         quickfile = {},
+        -- rename = {},
+        gitbrowse = {},
         scratch = {
             ---@type table<string, snacks.win.Config>
             win_by_ft = {
@@ -33,7 +35,7 @@ local plugins = {
                     keys = {
                         ["source"] = {
                             "<cr>",
-                            function(self)
+                            function()
                                 local name = "scratch." .. vim.fn.fnamemodify(vim.api.nvim_buf_get_name(self.buf), ":e")
                                 Snacks.debug.run({ buf = self.buf, name = name })
                             end,
@@ -47,8 +49,10 @@ local plugins = {
     },
     lazy = false,
     keys = {
-        { "<leader>.", function() Snacks.scratch() end,        desc = "Toggle Scratch Buffer" },
-        { "<leader>S", function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
+        { "<leader>.",  function() Snacks.scratch() end,        desc = "Toggle Scratch Buffer" },
+        { "<leader>S",  function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
+        { "<leader>gB", function() Snacks.gitbrowse() end,      desc = "Git Browse" },
+        { "<leader>gg", function() Snacks.lazygit() end,        desc = "Lazygit" },
     },
 
     init = function()
@@ -69,6 +73,22 @@ local plugins = {
                 Snacks.lazygit.open()
             end
             , { nargs = 0 })
+
+
+        -- local prev = { new_name = "", old_name = "" } -- Prevents duplicate events
+        -- vim.api.nvim_create_autocmd("User", {
+        --     pattern = "NvimTreeSetup",
+        --     callback = function()
+        --         local events = require("nvim-tree.api").events
+        --         events.subscribe(events.Event.NodeRenamed, function(data)
+        --             if prev.new_name ~= data.new_name or prev.old_name ~= data.old_name then
+        --                 data = data
+        --                 print("Renamed", data.old_name, "to", data.new_name)
+        --                 Snacks.rename.on_rename_file(data.old_name, data.new_name)
+        --             end
+        --         end)
+        --     end,
+        -- })
     end,
 }
 

@@ -14,12 +14,14 @@ local plugins = {
             { "hrsh7th/cmp-nvim-lsp" }, -- Required
             { "L3MON4D3/LuaSnip" },     -- Required
             { "rafamadriz/friendly-snippets" },
-        }
+        },
+        event = "VeryLazy",
     },
     {
         "nvim-lua/lsp-status.nvim",
         config = function()
-        end
+        end,
+        event = "VeryLazy",
     },
     -- {
     --     "danymat/neogen",
@@ -27,8 +29,8 @@ local plugins = {
     --     config = true,
     --     opts = { snippet_engine = "luasnip" }
     -- },
-    { "saadparwaiz1/cmp_luasnip" },
-    { "github/copilot.vim" },
+    { "saadparwaiz1/cmp_luasnip", event = "VeryLazy" },
+    { "github/copilot.vim",       event = "VeryLazy" },
     {
         "jose-elias-alvarez/null-ls.nvim",
         config = function()
@@ -39,7 +41,8 @@ local plugins = {
                     require("null-ls").builtins.diagnostics.actionlint
                 },
             })
-        end
+        end,
+        event = "VeryLazy"
     }
 }
 return plugins
