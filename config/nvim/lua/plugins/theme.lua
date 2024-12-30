@@ -89,4 +89,5 @@ local plugins = {
 
     { "lukas-reineke/indent-blankline.nvim" },
 }
+
 return plugins

@@ -13,4 +13,5 @@ local plugins = {
     }
 }
 
-return plugins
+-- return plugins
+return {}
