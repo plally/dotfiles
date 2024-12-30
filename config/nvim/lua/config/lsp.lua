@@ -1,12 +1,40 @@
--- IMPORTANT: make sure to setup neodev BEFORE lspconfig
-require("neodev").setup()
-
-local lspconfig_defaults = require("lspconfig").util.default_config
-lspconfig_defaults.capabilities = vim.tbl_deep_extend(
-    "force",
-    lspconfig_defaults.capabilities,
-    require("blink.cmp").get_lsp_capabilities(nil, true)
-)
+local cmp = require("cmp")
+local cmp_select = { behavior = cmp.SelectBehavior.Select }
+cmp.setup({
+    sources = {
+        { name = "nvim_lsp" },
+        { name = "luasnip" },
+    },
+    mapping = {
+        ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
+        ["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
+        ["<C-y>"] = cmp.mapping.confirm({ select = true }),
+        ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Navigate between snippet placeholder
+        ["<C-Space>"] = cmp.mapping.complete(),
+        ["<C-f>"] = cmp.mapping(function(fallback)
+            local luasnip = require("luasnip")
+            if luasnip.locally_jumpable(1) then
+                luasnip.jump(1)
+            else
+                fallback()
+            end
+        end, { "i", "s" }),
+        -- Jump to the previous snippet placeholder
+        ["<C-b>"] = cmp.mapping(function(fallback)
+            local luasnip = require("luasnip")
+            if luasnip.locally_jumpable(-1) then
+                luasnip.jump(-1)
+            else
+                fallback()
+            end
+        end, { "i", "s" }),
+    },
+    snippet = {
+        expand = function(args)
+            require("luasnip").lsp_expand(args.body)
+        end,
+    },
+})
 
 vim.diagnostic.config({
     virtual_text = { severity = { min = vim.diagnostic.severity.WARN } },
@@ -41,7 +69,17 @@ local buffer_autoformat = function(bufnr)
     })
 end
 
+-- Add cmp_nvim_lsp capabilities settings to lspconfig
+-- This should be executed before you configure any language server
+local lspconfig_defaults = require('lspconfig').util.default_config
+lspconfig_defaults.capabilities = vim.tbl_deep_extend(
+    'force',
+    lspconfig_defaults.capabilities,
+    require('cmp_nvim_lsp').default_capabilities()
+)
+
 vim.api.nvim_create_autocmd("LspAttach", {
+    desc = "LSP Actions",
     callback = function(event)
         local opts = { buffer = event.buf }
 
@@ -65,7 +103,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
             return
         end
         if not format_on_save[client.name] then
-            print("format_on_save not enabled for " .. client.name)
             return
         end
 

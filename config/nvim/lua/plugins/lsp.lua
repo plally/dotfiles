@@ -1,6 +1,16 @@
----@type LazySpec
+-- -@type LazySpec
 local plugins = {
-    { "neovim/nvim-lspconfig" },
+    {
+        "L3MON4D3/LuaSnip",
+        -- follow latest release.
+        version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+        -- install jsregexp (optional!).
+        build = "make install_jsregexp"
+    },
+    {
+        "neovim/nvim-lspconfig",
+    },
+
     { "williamboman/mason.nvim", config = true },
 
     {
@@ -15,12 +25,17 @@ local plugins = {
                 function(server_name)
                     require("lspconfig")[server_name].setup({})
                 end,
-
+                -- gopls = function()
+                --     -- noop
+                -- end,
                 lua_ls = function()
                     local conf = require("lspconfigs.lua")
                     require("lspconfig").lua_ls.setup(conf)
-                    vim.fn.jobstart("git pull origin main --recurse-submodules",
-                        { cwd = vim.fn.expand("$HOME/LuaLibs/glua/glua") })
+
+                    if vim.fn.isdirectory("lua/autorun") == 1 then
+                        vim.fn.jobstart("git pull origin main --recurse-submodules",
+                            { cwd = vim.fn.expand("$HOME/LuaLibs/glua/glua") })
+                    end
                 end,
                 rust_analyzer = function()
                     require("lspconfig").rust_analyzer.setup({
@@ -45,7 +60,7 @@ local plugins = {
         event = "VeryLazy",
     },
 
-    { "github/copilot.vim", event = "VeryLazy" },
+    { "github/copilot.vim",      event = "VeryLazy" },
 
 
     -- TODO none ls
@@ -62,39 +77,41 @@ local plugins = {
         end,
         event = "VeryLazy"
     },
-    {
-        "saghen/blink.cmp",
-        lazy = false, -- lazy loading handled internally
-        dependencies = "rafamadriz/friendly-snippets",
-        version = "v0.*",
-
-        ---@module 'blink.cmp'
-        ---@type blink.cmp.Config
-        opts = {
-            keymap = { preset = "enter" },
-
-            ---@diagnostic disable-next-line: missing-fields
-            appearance = {
-                use_nvim_cmp_as_default = true,
-                nerd_font_variant = "mono",
-            },
-
-            ---@diagnostic disable-next-line: missing-fields
-            completion = {
-                documentation = {
-                    auto_show = true,
-                    auto_show_delay_ms = 500,
-                }
-            },
-
-            ---@diagnostic disable-next-line: missing-fields
-            sources = {
-                default = { "lsp", "path", "snippets", "buffer" },
-            },
-
-        },
-        opts_extend = { "sources.default" }
-    },
+    { "hrsh7th/cmp-nvim-lsp" },
+    { "hrsh7th/nvim-cmp" },
+    -- {
+    --     "saghen/blink.cmp",
+    --     lazy = false, -- lazy loading handled internally
+    --     dependencies = "rafamadriz/friendly-snippets",
+    --     version = "v0.*",
+    --
+    --     ---@module 'blink.cmp'
+    --     ---@type blink.cmp.Config
+    --     opts = {
+    --         keymap = { preset = "enter" },
+    --
+    --         ---@diagnostic disable-next-line: missing-fields
+    --         appearance = {
+    --             use_nvim_cmp_as_default = true,
+    --             nerd_font_variant = "mono",
+    --         },
+    --
+    --         ---@diagnostic disable-next-line: missing-fields
+    --         completion = {
+    --             documentation = {
+    --                 auto_show = true,
+    --                 auto_show_delay_ms = 500,
+    --             }
+    --         },
+    --
+    --         ---@diagnostic disable-next-line: missing-fields
+    --         sources = {
+    --             default = { "lsp", "path", "snippets", "buffer" },
+    --         },
+    --
+    --     },
+    --     opts_extend = { "sources.default" }
+    -- },
 }
 
 return plugins
