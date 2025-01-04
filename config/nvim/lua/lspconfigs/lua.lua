@@ -5,7 +5,7 @@ if vim.fn.isdirectory("lua/autorun") == 1 then
                 workspace = {
                     maxPreload = 10000000,
                     library = {
-                        vim.fn.expand("$HOME/LuaLibs/glua")
+                        vim.fn.expand("$HOME/LuaLibs/glua"),
                     },
                     checkThirdParty = false
                 },
