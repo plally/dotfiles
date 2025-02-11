@@ -1,0 +1,11 @@
+theme = catppuccin-mocha
+
+font-feature = -liga
+font-feature = -calt
+font-feature = -dlig
+
+keybind = ctrl+shift+super+enter=toggle_fullscreen 
+keybind = ctrl+shift+super+backslash=toggle_window_decorations
+
+gtk-wide-tabs = false
+gtk-tabs-location = bottom

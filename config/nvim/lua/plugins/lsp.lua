@@ -1,36 +1,69 @@
----@type LazySpec
+-- -@type LazySpec
 local plugins = {
     {
-        "VonHeikemen/lsp-zero.nvim",
-        branch = "v2.x",
-        dependencies = {
-            -- LSP Support
-            { "neovim/nvim-lspconfig" },             -- Required
-            { "williamboman/mason.nvim" },           -- Optional
-            { "williamboman/mason-lspconfig.nvim" }, -- Optional
-
-            -- Autocompletion
-            { "hrsh7th/nvim-cmp" },     -- Required
-            { "hrsh7th/cmp-nvim-lsp" }, -- Required
-            { "L3MON4D3/LuaSnip" },     -- Required
-            { "rafamadriz/friendly-snippets" },
-        },
-        event = "VeryLazy",
+        "L3MON4D3/LuaSnip",
+        -- follow latest release.
+        version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+        -- install jsregexp (optional!).
+        build = "make install_jsregexp"
     },
+    {
+        "neovim/nvim-lspconfig",
+    },
+
+    { "williamboman/mason.nvim", config = true },
+
+    {
+        "williamboman/mason-lspconfig.nvim",
+        opts = {
+            ensure_installed = {
+                "rust_analyzer",
+                "gopls",
+                "lua_ls",
+            },
+            handlers = {
+                function(server_name)
+                    require("lspconfig")[server_name].setup({})
+                end,
+                -- gopls = function()
+                --     -- noop
+                -- end,
+                lua_ls = function()
+                    local conf = require("lspconfigs.lua")
+                    require("lspconfig").lua_ls.setup(conf)
+
+                    if vim.fn.isdirectory("lua/autorun") == 1 then
+                        vim.fn.jobstart("git pull origin main --recurse-submodules",
+                            { cwd = vim.fn.expand("$HOME/LuaLibs/glua/glua") })
+                    end
+                end,
+                rust_analyzer = function()
+                    require("lspconfig").rust_analyzer.setup({
+                        settings = {
+                            ["rust-analyzer"] = {
+                                files = {
+                                    -- if you have a directory with a large amount of files rust analyzer can get stuck so it must be excluded
+                                    excludeDirs = { "data" },
+                                },
+                            }
+                        }
+                    })
+                end,
+            }
+        }
+    },
+
     {
         "nvim-lua/lsp-status.nvim",
         config = function()
         end,
         event = "VeryLazy",
     },
-    -- {
-    --     "danymat/neogen",
-    --     dependencies = "nvim-treesitter/nvim-treesitter",
-    --     config = true,
-    --     opts = { snippet_engine = "luasnip" }
-    -- },
-    { "saadparwaiz1/cmp_luasnip", event = "VeryLazy" },
-    { "github/copilot.vim",       event = "VeryLazy" },
+
+    { "github/copilot.vim",      event = "VeryLazy" },
+
+
+    -- TODO none ls
     {
         "jose-elias-alvarez/null-ls.nvim",
         config = function()
@@ -43,6 +76,9 @@ local plugins = {
             })
         end,
         event = "VeryLazy"
-    }
+    },
+    { "hrsh7th/cmp-nvim-lsp" },
+    { "hrsh7th/nvim-cmp" },
 }
+
 return plugins

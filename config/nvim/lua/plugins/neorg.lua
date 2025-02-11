@@ -1,18 +1,13 @@
 -- https://vhyrro.github.io/posts/neorg-and-luarocks/
 
-
 ---@type LazySpec
 local config = {
     {
-        "vhyrro/luarocks.nvim",
-        priority = 1000,
-        config = true,
-    },
-    {
         "nvim-neorg/neorg",
         -- build = ":Neorg sync-parsers",
-        dependencies = { { "nvim-lua/plenary.nvim" }, { "nvim-neorg/neorg-telescope" }, { "vhyrro/luarocks.nvim" } },
-        cmd = "Neorg",
+        dependencies = { { "nvim-lua/plenary.nvim" }, { "nvim-neorg/neorg-telescope" } },
+        lazy = false,
+        -- cmd = "Neorg",
         config = function()
             require("neorg").setup {
                 load = {
@@ -35,7 +30,7 @@ local config = {
                     ["core.dirman"] = { -- Manages Neorg workspaces
                         config = {
                             workspaces = {
-                                notes = "~/notes",
+                                notes = "~/Documents/notes",
                             },
                             default_workspace = "notes",
                         },
@@ -64,4 +59,5 @@ local config = {
         end,
     },
 }
+
 return config
