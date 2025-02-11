@@ -1,4 +1,4 @@
----@type LazySpecnac
+---@type LazySpec
 local plugins = {
     "folke/snacks.nvim",
     opts = {
@@ -6,6 +6,9 @@ local plugins = {
             configure = true,
         },
         bigfile = {},
+        image = {},
+        notifier = {},
+        indent = {},
         dashboard = {
             sections = {
                 {
@@ -26,7 +29,6 @@ local plugins = {
         input = {},
         toggle = {},
         quickfile = {},
-        -- rename = {},
         statuscolumn = {},
         gitbrowse = {},
         scratch = {
@@ -50,10 +52,11 @@ local plugins = {
     },
     lazy = false,
     keys = {
-        { "<leader>.",  function() Snacks.scratch() end,        desc = "Toggle Scratch Buffer" },
-        { "<leader>S",  function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
-        { "<leader>gB", function() Snacks.gitbrowse() end,      desc = "Git Browse" },
-        { "<leader>gg", function() Snacks.lazygit() end,        desc = "Lazygit" },
+        { "<leader>.",  function() Snacks.scratch() end,               desc = "Toggle Scratch Buffer" },
+        { "<leader>S",  function() Snacks.scratch.select() end,        desc = "Select Scratch Buffer" },
+        { "<leader>gB", function() Snacks.gitbrowse() end,             desc = "Git Browse" },
+        { "<leader>gg", function() Snacks.lazygit() end,               desc = "Lazygit" },
+        { "<leader>nh", function() Snacks.notifier.show_history() end, desc = "Show notification history" },
     },
 
     init = function()
