@@ -79,39 +79,6 @@ local plugins = {
     },
     { "hrsh7th/cmp-nvim-lsp" },
     { "hrsh7th/nvim-cmp" },
-    -- {
-    --     "saghen/blink.cmp",
-    --     lazy = false, -- lazy loading handled internally
-    --     dependencies = "rafamadriz/friendly-snippets",
-    --     version = "v0.*",
-    --
-    --     ---@module 'blink.cmp'
-    --     ---@type blink.cmp.Config
-    --     opts = {
-    --         keymap = { preset = "enter" },
-    --
-    --         ---@diagnostic disable-next-line: missing-fields
-    --         appearance = {
-    --             use_nvim_cmp_as_default = true,
-    --             nerd_font_variant = "mono",
-    --         },
-    --
-    --         ---@diagnostic disable-next-line: missing-fields
-    --         completion = {
-    --             documentation = {
-    --                 auto_show = true,
-    --                 auto_show_delay_ms = 500,
-    --             }
-    --         },
-    --
-    --         ---@diagnostic disable-next-line: missing-fields
-    --         sources = {
-    --             default = { "lsp", "path", "snippets", "buffer" },
-    --         },
-    --
-    --     },
-    --     opts_extend = { "sources.default" }
-    -- },
 }
 
 return plugins
