@@ -24,4 +24,3 @@ vim.opt.rtp:prepend(lazypath)
 
 require("config.lazy")
 require("config.style")
-require("config.lsp")

@@ -10,7 +10,7 @@ local plugins = {
     {
         "mason-org/mason-lspconfig.nvim",
         opts = {
-            ensure_installed = { "lua_ls@3.15.0", "gopls", "rust_analyzer" },
+            ensure_installed = { "lua_ls@3.15.0", "gopls", "rust_analyzer", "copilot" },
             automatic_enable = true
         },
         dependencies = {
@@ -48,7 +48,19 @@ local plugins = {
         ---@module 'blink.cmp'
         ---@type blink.cmp.Config
         opts = {
-            keymap = { preset = "enter" },
+            keymap = {
+                preset = "enter",
+                ["<C-J>"] = {
+                    "snippet_forward",
+                    function() -- sidekick next edit suggestion
+                        return require("sidekick").nes_jump_or_apply()
+                    end,
+                    function() -- if you are using Neovim's native inline completions
+                        return vim.lsp.inline_completion.get()
+                    end,
+                    "fallback",
+                },
+            },
 
             completion = { documentation = { auto_show = true, auto_show_delay_ms = 600 } },
 
@@ -136,5 +148,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
 })
 
+vim.api.nvim_create_autocmd("ColorScheme", {
+    callback = function()
+        vim.api.nvim_set_hl(0, "ComplHint", {
+            fg = "#666666", -- ghost text color
+            italic = true,
+        })
+    end,
+})
+vim.lsp.inline_completion.enable()
 
 return plugins
