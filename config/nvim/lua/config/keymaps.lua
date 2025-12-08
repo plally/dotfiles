@@ -11,7 +11,6 @@ vim.keymap.set("n", "<leader>tl", "<cmd>bn<CR>")
 
 vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
 
-vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 
 vim.keymap.set("n", "K", vim.lsp.buf.hover)
 

@@ -30,9 +30,7 @@ local plugins = {
             "nvim-treesitter/nvim-treesitter",
         },
         config = function()
-            require("go").setup({
-                luasnip = true
-            })
+            require("go").setup()
 
             local format_sync_grp = vim.api.nvim_create_augroup("GoImport", {})
             vim.api.nvim_create_autocmd("BufWritePre", {
@@ -44,7 +42,6 @@ local plugins = {
             })
         end,
         ft = { "go", "gomod" },
-        -- build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
     }
 }
 

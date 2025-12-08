@@ -4,13 +4,6 @@ local config = {
     { "folke/trouble.nvim",    cmd = "Trouble", dependencies = { "nvim-tree/nvim-web-devicons" }, opts = {} },
     { "numToStr/Comment.nvim", config = true },
     {
-        "mbbill/undotree",
-        cmd = "UndotreeToggle",
-        config = function()
-        end
-    },
-    { "dstein64/vim-startuptime", cmd = "StartupTime" },
-    {
         "folke/which-key.nvim",
         event = "VeryLazy",
         opts = {

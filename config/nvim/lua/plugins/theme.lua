@@ -103,6 +103,7 @@ local plugins = {
         },
         config = true,
         opts = {},
+
     },
 
     { "lewis6991/gitsigns.nvim",            config = true },

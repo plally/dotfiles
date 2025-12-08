@@ -2,6 +2,12 @@
 local plugins = {
     "folke/snacks.nvim",
     opts = {
+        explorer = {},
+        picker = {
+            sources = {
+                explorer = {}
+            }
+        },
         lazygit = {
             configure = true,
         },
@@ -57,6 +63,9 @@ local plugins = {
         { "<leader>gB", function() Snacks.gitbrowse() end,             desc = "Git Browse" },
         { "<leader>gg", function() Snacks.lazygit() end,               desc = "Lazygit" },
         { "<leader>nh", function() Snacks.notifier.show_history() end, desc = "Show notification history" },
+
+        { "<leader>pf", function() Snacks.picker.files({}) end,        desc = "Find files" },
+        { "<leader>ps", function() Snacks.picker.grep() end,           desc = "Live grep" },
     },
 
     init = function()
@@ -77,22 +86,6 @@ local plugins = {
                 Snacks.lazygit.open()
             end
             , { nargs = 0 })
-
-
-        -- local prev = { new_name = "", old_name = "" } -- Prevents duplicate events
-        -- vim.api.nvim_create_autocmd("User", {
-        --     pattern = "NvimTreeSetup",
-        --     callback = function()
-        --         local events = require("nvim-tree.api").events
-        --         events.subscribe(events.Event.NodeRenamed, function(data)
-        --             if prev.new_name ~= data.new_name or prev.old_name ~= data.old_name then
-        --                 data = data
-        --                 print("Renamed", data.old_name, "to", data.new_name)
-        --                 Snacks.rename.on_rename_file(data.old_name, data.new_name)
-        --             end
-        --         end)
-        --     end,
-        -- })
     end,
 }
 
