@@ -108,7 +108,7 @@ local buffer_autoformat = function(bufnr)
         buffer = bufnr,
         group = group,
         desc = "LSP format on save",
-        callback = function(...)
+        callback = function()
             vim.lsp.buf.format({ async = false, timeout_ms = 10000 })
         end,
     })
