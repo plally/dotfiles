@@ -34,7 +34,6 @@ local plugins = {
                 },
             }
         end
-    },
-    { "nvim-treesitter/playground", cmd = "TSPlaygroundToggle" },
+    }
 }
 return plugins

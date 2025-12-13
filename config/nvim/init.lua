@@ -4,24 +4,23 @@ if vim.fn.has("wsl") == 1 then
     require("config.wsl")
 end
 
-local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
 -- Auto-install lazy.nvim if not present
 if not vim.uv.fs_stat(lazypath) then
-    print('Installing lazy.nvim....')
+    print("Installing lazy.nvim....")
     vim.fn.system({
-        'git',
-        'clone',
-        '--filter=blob:none',
-        'https://github.com/folke/lazy.nvim.git',
-        '--branch=stable', -- latest stable release
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable", -- latest stable release
         lazypath,
     })
-    print('Done.')
+    print("Done.")
 end
 
 vim.opt.rtp:prepend(lazypath)
 
 require("config.lazy")
 require("config.style")
-require("config.lsp")
