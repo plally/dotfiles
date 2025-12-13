@@ -1,5 +1,5 @@
 if vim.fn.isdirectory("lua/autorun") == 1 then
-    return {
+    vim.lsp.config("lua_ls", {
         settings = {
             Lua = {
                 workspace = {
@@ -47,15 +47,5 @@ if vim.fn.isdirectory("lua/autorun") == 1 then
                 }
             }
         }
-    }
-else
-    return {
-        settings = {
-            Lua = {
-                workspace = {
-                    checkThirdParty = false
-                }
-            }
-        }
-    }
+    })
 end
