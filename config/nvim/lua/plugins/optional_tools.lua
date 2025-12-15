@@ -9,4 +9,10 @@ return {
     -- },
     -- { "nvim-treesitter/playground", cmd = "TSPlaygroundToggle" },
     -- { "dstein64/vim-startuptime", cmd = "StartupTime" },
+    -- {
+    --     "nvzone/typr",
+    --     dependencies = "nvzone/volt",
+    --     opts = {},
+    --     cmd = { "Typr", "TyprStats" },
+    -- }
 }

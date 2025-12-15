@@ -1,4 +1,5 @@
-theme = catppuccin-mocha
+theme = Catppuccin Mocha
+
 
 font-feature = -liga
 font-feature = -calt
