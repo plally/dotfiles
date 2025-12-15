@@ -2,7 +2,10 @@ local format_on_save = {
     lua_ls = true,
     rust = true,
     nix = true,
+    ts_ls = true,
+    terraformls = true,
 }
+
 
 ---@type LazySpec
 local plugins = {
@@ -10,7 +13,7 @@ local plugins = {
     {
         "mason-org/mason-lspconfig.nvim",
         opts = {
-            ensure_installed = { "lua_ls@3.15.0", "gopls", "rust_analyzer", "copilot" },
+            ensure_installed = { "lua_ls@3.15.0", "gopls", "rust_analyzer", "copilot", "terraformls" },
             automatic_enable = true
         },
         dependencies = {

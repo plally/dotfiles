@@ -3,6 +3,11 @@ local plugins = {
     {
         "folke/sidekick.nvim",
         opts = {
+            nes = {
+                trigger = {
+                    events = { "ModeChanged i:n", "User SidekickNesDone" },
+                },
+            },
             cli = {
                 mux = {
                     backend = "tmux",
